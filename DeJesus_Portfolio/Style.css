@@ -1,0 +1,1822 @@
+html {
+  scroll-snap-type: y mandatory;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Aleo', serif;
+  background-color: #5A765A;
+  color: #fff;
+}
+
+body a {
+  text-decoration: none;
+  color: #fff;
+}
+
+section {
+  min-height: 100vh;
+  scroll-snap-align: start;
+  display: flex;
+  position: relative;
+}
+
+.BG-Card1 h1, .BG-Card2 h1, .BG-Card3 h1, .BG-Card4 h1 {
+  margin-top: clamp(8px, 1.5vw, 20px);
+} 
+
+
+
+
+/* === NavBar === */
+.BG-Card1 {
+  margin: 2vh auto;
+  padding: 2vw;
+  width: 94vw;
+  border-radius: 2vw;
+  background-color: #B1C2A7;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+:root { --navPadY: clamp(10px, 2vw, 15px); --navPadX: clamp(16px, 4vw, 32px); } /* Navbar Padding */
+
+.Navbar {
+  position: sticky; /* Set to Sticky to support smaller resolutions */
+  top: 0;
+  z-index: 1000;
+  padding: var(--navPadY) var(--navPadX);
+  color: #fff;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 800ms ease;
+}
+
+.Navbar.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.Navbar nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 2rem;
+}
+
+.Navbar nav ul li {
+  font-size: clamp(1rem, 2.2vw, 2rem);
+  transition: color 0.3s ease;
+  line-height: 1.2;
+}
+
+.Navbar nav ul li a {
+  color: inherit;
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+  padding: .35rem .1rem;
+}
+
+/* === Navbar Animation ===   */
+.Navbar nav ul li a::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 2px;
+  background: #5A765A;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+.Navbar nav ul li:hover a::after { 
+  transform: scaleX(1);
+}
+
+/* Keyframes for NavBar */
+@keyframes textUnderline {
+  from { color: #fff; }
+  to   { color: #5A765A; }
+}
+@keyframes underlineGrow {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+
+/* Responsive spacing for nav list */
+@media (max-width: 1200px) { .Navbar nav ul { gap: 1.5rem; } }
+@media (max-width: 768px)  { .Navbar nav ul { gap: 1.25rem; } }
+@media (max-width: 400px)  { .Navbar nav ul { gap: 1rem; } }
+
+
+
+
+/* === HOMEPAGE === */
+.HomePageContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  flex: 1;
+  margin: 2vh 0;
+}
+
+/* Hompage Picture BG Card W/ Animation*/
+.Picture-Card-BG1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #5A765A;
+  border-radius: 2vw;
+  box-sizing: border-box;
+  width: clamp(250px, 30vw, 500px);
+  flex-shrink: 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0;
+}
+
+.Picture-Card-BG1:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 32px rgba(63, 253, 38, 0.35);
+}
+
+/* Keyframes for Picture-Card-BG1 */
+@keyframes swoopIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.Picture-Card-BG1.swoop-in {
+  animation: swoopIn 1s ease-out forwards;
+}
+
+/* Homepage Profile Picture */
+.Picture-Card-BG1 img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 1vw;
+  transition: transform 0.3s ease;
+}
+
+.Picture-Card-BG1:hover img {
+  transform: scale(1.03);
+}
+
+/* Profile Content */
+.Profile-Block {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  flex: 1;
+  min-width: 280px;
+  max-width: 600px;
+  margin-top: clamp(0.5rem, 3vh, 1rem);
+  padding: clamp(1rem, 4vw, 4rem) clamp(1rem, 4vw, 0rem);
+}
+
+.Text-Group {
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.Text-Section1 {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+/* Shared HeadText */
+.HeadText1,
+.HeadText2 {
+  font-weight: 700;
+  margin: 0 auto;            
+  text-align: center;        
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 0.15em solid #5A765A;
+  display: inline-block;
+}
+
+/* Base HeadText1 */
+.HeadText1 { 
+  font-size: clamp(2rem, 4.2vw, 8rem); 
+  line-height: 1.05; 
+  opacity: 0;
+}
+
+/* Typing Animation for HeadText*/
+.TypingWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* HeadText1 Animation Trigger */
+.HeadText1.animate-head1 {
+  animation: 
+  fadeInAfterDelay1 0.01s linear 1s forwards,
+  typing1 3s steps(30, end) forwards 1s,
+  blink-caret1 0.75s step-end infinite 1s;
+}
+
+/* Quick opacity animation for HeadText1 */
+@keyframes fadeInAfterDelay1 {
+  to { opacity: 1; }
+}
+
+/* Base HeadText2 */
+.HeadText2 { 
+  font-size: clamp(2rem, 4.2vw, 3.8rem); 
+  line-height: 1.25; 
+  opacity: 0;
+}
+
+/* HeadText1 Animation Trigger */
+.HeadText2.animate-head2 {
+  animation: 
+  fadeInAfterDelay2 0.01s linear 2.4s forwards,
+  typing2 3s steps(30, end) forwards 2.4s,
+  blink-caret2 0.75s step-end infinite 2.4s;
+}
+
+/* Quick opacity animation for HeadText2 */
+@keyframes fadeInAfterDelay2 {
+  to { opacity: 1; }
+}
+
+/* Typing animations for spans */
+.HeadText1 span,
+.HeadText2 span {
+  display: inline-block;
+}
+
+/* Keyframes for typing */
+@keyframes typing1 { from { width: 0ch; } to { width: 30ch; } }
+@keyframes typing2 { from { width: 0ch; } to { width: 30ch; } }
+
+/* Caret blinks while typing, then disappears */
+@keyframes blink-caret1 {
+  0%, 49% { border-color: #5A765A; }
+  50%, 100% { border-color: transparent; }
+}
+@keyframes blink-caret2 {
+  0%, 49% { border-color: #5A765A; }
+  50%, 100% { border-color: transparent; }
+}
+
+/* Responsive Handing for HeadText1 & HeadText2 */
+@media (min-width: 1200px) {
+  .HeadText1,
+  .HeadText2 {
+    white-space: nowrap;
+  }
+
+  .HeadText1 span:first-child::after,
+  .HeadText2 span:first-child::after {
+    content: '\00a0';
+  }
+}
+
+@media (min-width: 1200px) {
+  .HeadText1 {
+    white-space: nowrap; 
+  }
+}
+
+@media (max-width: 768px) {
+  .HeadText1, .HeadText2 {
+    font-size: clamp(1.5rem, 5vw, 3.5rem);
+  }
+}
+
+/* ==== Custom HR1 Divider W/ animation ==== */
+.CustomHR1 {
+  border: none;
+  border-top: clamp(1px, 0.25vw, 3px) solid #5A765A;
+  width: clamp(60%, 90%, 100%);
+  margin: 1.2rem auto;
+}
+
+/* CustomHR1 Animation Trigger */
+.CustomHR1.nc-animate {
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: left center;
+  animation: hrSwoop 0.8s ease-out forwards;
+  animation-delay: 4s;
+}
+
+/* Keyframes for CustomHR1 */
+@keyframes hrSwoop {
+  0% {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+/* Subtext Paragraph */
+.SubText {
+  font-size: clamp(1rem, 2vw, 1.6rem);
+  line-height: 1.5;
+  color: #fff;
+  text-align: left;
+  max-width: 110%;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* SubText Animation Trigger */
+.SubText.nc-animate {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: ncFadeIn 1s ease-out forwards;
+  animation-delay: 5s; 
+}
+
+/* Keyframes for SubText */
+@keyframes ncFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* HomePage Buttons Section */
+.Btn-Section1 {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+/* HomePage Buttons */
+.Big-Btn1 {
+  padding: clamp(0.8rem, 2vw, 1.6rem) clamp(1.5rem, 3vw, 2rem); /* more padding for bigger look */
+  background-color: #5A765A;
+  color: white;
+  border-radius: 1rem;
+  text-decoration: none;
+  font-size: clamp(1.2rem, 2.5vw, 2rem); /* 🔹 bigger font and scales */
+  transition: background 0.3s ease, transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.Big-Btn1:hover {
+  background-color: #466046;
+  transform: translateY(-2px);
+  box-shadow: 0 24px 48px rgba(94, 196, 81, 0.35),  /* main shadow */
+  0 12px 24px rgba(94, 196, 81, 0.25);  /* softer secondary shadow */
+}
+
+/* HomePage Buttons Animation */
+.Btn-Section1 {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* HomePage Button Animation Trigger */
+.Btn-Section1.btnFadeUp {
+  animation: btnFadeUp 0.8s ease-out forwards;
+  animation-delay: 5s;
+}
+
+/* Keyframe for HomePage Button */
+@keyframes btnFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+
+/* === ProjectsPage ===*/
+.BG-Card2 {
+  margin: 2vh auto;
+  margin-bottom: 0;
+  padding: 2vw;
+  width: 94vw;
+  border-radius: 2vw 2vw 0 0;
+  background-color: #B1C2A7;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.ProjectSection-Head {
+  position: relative;
+  text-align: center;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: bold;
+  margin-top: clamp(-1.5rem, -2vw, -1rem);
+  margin-bottom: 0;
+  line-height: 0.6;
+  opacity: 0;
+}
+
+/* ProjectSection-Head Animation Trigger */
+.ProjectSection-Head.animate-head3 {
+  animation: bounceFadeIn 1s ease-out forwards;
+  animation-delay: 0.5s;
+}
+
+/* Keyframes ProjectSection-Head */
+@keyframes bounceFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(10px);
+  }
+  70% {
+    transform: translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Slider buttons inside ProjectSection-Head */
+.ProjectSection-Head .slider-btn {
+  position: absolute;
+  top: 70%;
+  transform: translateY(-50%);
+  background: #476d4a;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  padding: 0.8rem 1rem;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 10;
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+/* Left Button Slider positions relative to ProjectSection-Head */
+.ProjectSection-Head .slider-btn.prev {
+  left: 25%;
+}
+
+/* Right Button Slider positions relative to ProjectSection-Head */
+.ProjectSection-Head .slider-btn.next {
+  right: 25%;
+}
+
+.ProjectSection-Head .slider-btn:hover {
+  background: #3e5540;
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* Responsive ProjectSection-Head and slider-btn's */
+@media (max-width: 1024px) {
+  .ProjectSection-Head .slider-btn.prev { left: 10%; }
+  .ProjectSection-Head .slider-btn.next { right: 10%; }
+  .ProjectSection-Head .slider-btn { font-size: 1.8rem; }
+}
+
+@media (max-width: 768px) {
+  .ProjectSection-Head .slider-btn.prev { left: 1%; }
+  .ProjectSection-Head .slider-btn.next { right: 1%; }
+  .ProjectSection-Head .slider-btn { font-size: 1.5rem; top: 90%; padding: 0.5rem 0.8rem; }
+}
+
+@media (max-width: 400px) {
+  .ProjectSection-Head .slider-btn.prev { left: 0%; }
+  .ProjectSection-Head .slider-btn.next { right: 0%; }
+  .ProjectSection-Head .slider-btn { font-size: 1.2rem; top: 92%; }
+}
+
+/* ==== Custom HR2 Divider ==== */
+.CustomHR2 {
+  width: clamp(25%, 35%, 45%);
+  height: clamp(4px, 0.8vw, 8px); 
+  border-radius: 2px;
+  background: #5A765A;
+  border: none;
+  margin: clamp(-2rem, -2vw, -1.7rem) auto 0;
+  margin-bottom: -2rem;
+}
+
+/* Adaptive CustomHR2 Divider */
+@media (max-width: 1200px) {
+  .CustomHR2 {
+      width: clamp(40%, 60%, 70%);
+  }
+}
+
+@media (max-width: 768px) {
+  .CustomHR2 {
+      width: clamp(70%, 80%, 90%);
+  }
+}
+
+@media (max-width: 400px) {
+  .CustomHR2 {
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+  }
+}
+
+/* Project Container holding the header and slider/cards */
+.ProjectPageContent {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  justify-items: center;
+  align-items: start;
+  gap: clamp(10px, 2.4vw, 24px);
+  width: 100%;
+  margin: 2vh 0;
+}
+
+/* Header grid layout so HR spans full width */
+.ProjectSection-Head {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  margin-top: 2rem;
+  gap: clamp(6px, 1.2vw, 14px);
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* H1 */
+.ProjectSection-Head h1 { grid-column: 1 / -1; margin: 0; }
+
+/* Shared Size of ProjectSection container and CustomHR2 Divider */
+.ProjectSection-Head .CustomHR2 {
+  grid-column: 1 / -1;               
+  justify-self: center;
+  height: 6px;
+  width: clamp(160px, 88%, 640px);
+  background-color: var(--accent, #B1C2A7);
+  border: 0;
+  border-radius: 2px;
+  margin: 0;
+  margin-bottom: 2rem;
+}
+
+/* Shared Size of ProjectSection-head container and slider-btn */
+.ProjectSection-Head .slider-btn {
+  position: absolute;
+  inset-block-start: 50%;            
+  transform: translateY(-50%); 
+  z-index: 20;  
+  pointer-events: auto; 
+  width: var(--btn-size);
+  height: var(--btn-size);
+  display: grid; place-items: center;
+  border-radius: 999px;
+  color: #fff;
+  background: var(--btn-bg, rgba(0,0,0,.35));
+  border: 0;
+  cursor: pointer;
+  transition: background .2s, transform .2s;
+  min-width: 44px; min-height: 44px;
+}
+
+/* Slider buttons with consistent touch targets and responsive offset */
+:root {
+  --btn-size: clamp(40px, 6vw, 58px);
+  --btn-offset: clamp(6px, 2vw, 20px);
+}
+
+/* Slider shell + track */
+.project-slider {
+  display: flex;
+  transition: transform 0.5s ease-in-out; /* full card animation */
+  gap: clamp(1rem, 2vw, 2rem); /* gap between each Project-Card */
+  width: 100%;
+  height: auto;
+}
+
+/* Parent Slider Container */
+.slides {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 100%;     
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;       
+}
+
+.slides::-webkit-scrollbar {
+  display: none;               
+}
+
+/* Individual Slider Container */
+.slide {
+  scroll-snap-align: start;    
+  width: 100%;                  
+  flex-shrink: 0;
+}
+
+/* Shared Size of ProjectSection container and CustomHR2 Divider */
+.slide img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;         
+  display: block;
+  margin: 0 auto;        
+}
+
+/* Main Project Slider Navigation buttons */
+.ProjectSection-Head .slider-btn.prev { inset-inline-start: var(--btn-offset); }
+.ProjectSection-Head .slider-btn.next { inset-inline-end:  var(--btn-offset); }
+
+.ProjectSection-Head .slider-btn:hover  {
+  background: var(--btn-bg-hover, rgba(0,0,0,.55));
+  transform: translateY(-50%) scale(1.05);
+}
+
+.ProjectSection-Head .slider-btn:active { transform: translateY(-50%) scale(0.98); }
+
+.ProjectSection-Head .slider-btn:focus-visible {
+  box-shadow: 0 0 0 3px rgba(181,220,181,.6);
+}
+
+/* Adaptive ProjectSection-Head for smaller resolutions */
+@media (max-width: 520px) {
+  .ProjectSection-Head .slider-btn {
+    inset-block-start: auto;
+    inset-block-end: clamp(8px, 3vw, 18px); 
+    transform: none;
+  }
+}
+
+/* Base Project Card */
+.Project-Card {
+  display: flex;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(10px) scale(1);
+  transition: opacity 0.45s ease, transform 0.45s ease, box-shadow 0.3s ease;
+  background: #5A765A;
+  border-radius: 2vw;
+  padding: clamp(12px, 2vw, 12px);
+  flex: 0 0 100%;
+  box-sizing: border-box;
+}
+
+.Project-Card:hover {
+  transform: translateY(0) scale(1.6); /* slightly lift and enlarge */
+  box-sizing: border-box;box-shadow: 0 0 32px rgba(63, 253, 38, 0.35);
+}
+
+/* Base Project Card Animation Trigger */
+.Project-Card.bounce-in {
+  animation: projectCardBounce 1.2s ease-out forwards;
+}
+
+/* Bounce out first, then bounce in */
+@keyframes projectCardBounce {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0.8); /* shrink out */
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(40px) scale(0.9); /* move down */
+  }
+  40% {
+    transform: translateY(-15px) scale(1.05); /* overshoot upward */
+  }
+  60% {
+    transform: translateY(8px) scale(0.97); /* fall slightly */
+  }
+  80% {
+    transform: translateY(-4px) scale(1.02); /* tiny pop */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1); /* back to normal */
+  }
+}
+
+/* Active card shown as a responsive grid */
+.Project-Card.active {
+  display: grid;
+  grid-template-columns: minmax(320px, 1.4fr) minmax(260px, 1fr);
+  gap: clamp(12px, 2vw, 28px);
+  align-items: center;  
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.Project-Card.active:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 10px 32px rgba(63, 253, 38, 0.35);
+}
+
+/* Adpative Project-Card for smaller screens */
+@media (max-width: 1200px) {
+  .Project-Card.active {
+    grid-template-columns: minmax(360px, 1.55fr) minmax(240px, 0.95fr);
+  }
+}
+@media (max-width: 900px) {
+  .Project-Card.active { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 720px) {
+  .Project-Card.active {
+    grid-template-columns: 1fr;
+  }
+  .Project-Description { align-self: start; }
+}
+
+/* Project Image Container*/
+.Project-Img-Holder {
+  position: relative;
+  overflow: hidden;
+  border-radius: clamp(10px, 1.5vw, 18px);
+  width: 100%;
+  aspect-ratio: 16/9;
+  background-color: #B1C2A7;
+  display: block;
+}
+
+/* Project Image shared size with slider container*/
+.Project-Img-Holder .slider {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slider img {
+  flex: 0 0 auto;
+  width: 50%;
+  height: 80%;   /* ⬅️ this shrinks them inconsistently */
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+.slider {
+  display: flex;
+  width: 180%;
+  height: 120%;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slider img {
+  flex: 0 0 50%;
+}
+
+/* Project Slider Navigation buttons */
+.Project-Img-Holder button.prev,
+.Project-Img-Holder button.next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.4);
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  z-index: 10;
+}
+
+.Project-Img-Holder button.prev { left: 1rem; }
+.Project-Img-Holder button.next { right: 1rem; }
+
+.Project-Img-Holder button:hover {
+  background: rgba(0,0,0,0.7);
+}
+
+/* Project Description */
+.DescriptionSection {
+  align-self: center;   
+  height: auto;                   
+  display: grid;
+  gap: clamp(8px, 1.4vw, 16px);
+  color: #fff;
+  text-align: left;
+  font-size: clamp(1rem, 1.35vw, 1.15rem);
+  min-width: 260px;
+  margin: 0;
+  padding: clamp(4px, 1.2vw, 16px);
+  box-sizing: border-box;
+  align-items: start;
+  justify-items: start;
+}
+
+/* Adaptive Description Section */
+@media (max-width: 900px) {
+  .Project-Img-Holder,
+  .DescriptionSection {
+    height: auto;
+    align-self: auto;
+  }
+}
+
+.Project-Title {
+  margin: 0;
+  line-height: 1.1;
+  font-size: clamp(1.4rem, 3.4vw, 2.4rem);
+  text-align: left;
+}
+
+/* HR inside the description if used */
+.CustomHR3 {
+  width: clamp(160px, 88%, 440px);
+  height: 4px;
+  border-radius: 2px;
+  background-color: #B1C2A7;
+  border: 0;
+  margin: 0;  
+}
+
+/* Description text */
+.DescriptionSection p {
+  width: 86%;
+  margin: 0;
+  margin-top: 0.5rem;
+  line-height: 1.35;
+  text-align: justify;     
+  text-align-last: left;   
+}
+
+/* Buttons row */
+.Btn-Section2 {
+  margin: 0;                      
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+  gap: clamp(10px, 1.6vw, 18px);
+  width: 100%;
+}
+
+.Big-Btn2 {
+  padding: clamp(0.7rem, 2.1vw, 0.95rem) clamp(1.1rem, 3vw, 1.6rem);
+  background-color: #B1C2A7;
+  color: #fff;
+  border-radius: 1rem;
+  text-decoration: none;
+  font-size: clamp(1rem, 2.2vw, 1.25rem);
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  flex-shrink: 0;
+}
+.Big-Btn2:hover {
+  transform: translateY(-1px) scale(1.04);
+  box-shadow: 0 16px 32px rgba(94, 196, 81, 0.35);
+}
+
+/* Adaptive Project Card  Active*/
+@media (max-width: 1200px) and (min-width: 901px) {
+  .Project-Card.active {
+    grid-template-columns:
+      minmax(clamp(160px, 38vw, 280px), 1.15fr)
+      minmax(clamp(120px, 32vw, 240px), 0.85fr);
+    gap: clamp(12px, 2vw, 24px);
+    align-items: center;
+    justify-items: stretch;
+  }
+
+  /* Allow grid children to actually shrink within their tracks */
+  .Project-Img-Holder,
+  .DescriptionSection {
+    min-width: 0;
+    min-height: 0;
+  }
+
+  /* Let the image define height naturally; no forced 60% width */
+  .Project-Img-Holder { margin: 0; }
+  .Project-Img-Holder img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  /* Center the whole description block vertically in its column */
+  .DescriptionSection {
+    align-self: center !important;
+    height: auto !important;
+    justify-items: start;
+    text-align: left;
+    gap: clamp(8px, 1.4vw, 16px);
+    padding: clamp(8px, 1.4vw, 16px);
+    overflow-wrap: anywhere;
+  }
+}
+
+/* Narrow tablets/large phones: stack vertically and center */
+@media (max-width: 900px) {
+  .Project-Card.active {
+    grid-template-columns: 1fr;   
+    justify-items: center;
+    text-align: center;
+  }
+  .DescriptionSection {
+    justify-items: center;
+    text-align: center;
+  }
+  .Btn-Section2 {
+    justify-content: center;
+  }
+  .Project-Title {
+    text-align: center;
+    font-size: clamp(1.3rem, 5.5vw, 2rem);
+  }
+}
+
+/* Small phones: comfortable padding and readable sizes */
+@media (max-width: 520px) {
+  .Project-Card {
+    padding: clamp(10px, 4vw, 16px);
+    border-radius: clamp(12px, 3vw, 16px);
+  }
+  .Project-Img-Holder { padding: clamp(8px, 3vw, 12px); }
+  .DescriptionSection { padding: clamp(6px, 3vw, 12px); }
+}
+
+/* Optional: reduce hover scale on very small screens to avoid clipping */
+@media (hover: none) {
+  .Project-Img-Holder img:hover { transform: none; }
+}
+
+:root{
+  --card-bg: #B1C2A7;
+  --accent:  #5A765A;
+  --radius-card: 2vw;
+  --radius-inner: 1.25rem;
+}
+
+/* Ensure predictable sizing */
+*, *::before, *::after { box-sizing: border-box; }
+
+
+/* Project Image Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.8);
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.modal-slider {
+  position: relative;
+  width: 95vw;
+  max-width: 1600px;  
+  height: 90vh;        
+  overflow: hidden;   
+}
+
+.modal-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  top: 0;
+  left: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 1;
+}
+
+.modal-prev,
+.modal-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: clamp(2.5rem, 4vw, 5rem);
+  color: #fff;
+  background: rgba(0,0,0,0.3);
+  border-radius: 2rem;
+  cursor: pointer;
+  padding: clamp(0.3rem, 1vw, 0.5rem) clamp(0.5rem, 2vw, 1rem);
+  z-index: 1001;
+  transition: all 0.2s ease;
+}
+
+.modal-prev {
+  left: clamp(5px, 2vw, 10px);
+}
+
+.modal-next {
+  right: clamp(10px, 2vw, 20px);
+}
+
+/* Adaptive Modal Buttons */
+@media (max-width: 1200px) {
+  .modal-prev,
+  .modal-next {
+    font-size: 4rem;
+    padding: 0.4rem 0.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .modal-prev,
+  .modal-next {
+    font-size: 3rem;
+    padding: 0.3rem 0.6rem;
+  }
+}
+
+.modal-prev:hover,
+.modal-next:hover {
+  font-size: 5.3rem;
+  color: #5A765A;
+}
+
+.close {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  position: absolute; /* relative to modal */
+  top: clamp(10px, 2vw, 20px);
+  right: clamp(15px, 3vw, 30px);
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 1001; /* above images */
+}
+
+.close:hover {
+  color: #5A765A;
+  font-size: clamp(2.7rem, 5.5vw, 5rem);
+}
+
+/* Adaptive Close Button */
+@media (max-width: 768px) {
+  .close {
+    font-size: 3rem;
+    top: 15px;
+    right: 15px;
+  }
+
+  .close:hover {
+    font-size: 3.3rem;
+  }
+}
+
+
+
+
+/* === AboutMePage ===*/
+section#about {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: clamp(1rem, 2vh, 3rem) 1rem;
+  box-sizing: border-box;
+}
+
+.BG-Card3 {
+  margin-top: -1.2rem;
+  padding: 2vw;
+  width: 94vw;
+  border-radius: 0 0 2vw 2vw;
+  background-color: #B1C2A7;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.AboutSection-Head {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: bold;
+  text-align: center;
+  margin-top: clamp(-1.5rem, -2vw, -1rem);
+  margin-bottom: 0;
+  line-height: 0.6;
+  opacity: 0;
+}
+
+.bounceFadeIn {
+  animation: bounceFadeIn 1s ease-out forwards;
+}
+
+/* Keyframes */
+@keyframes bounceFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(10px);
+  }
+  70% {
+    transform: translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.CustomHR4 {
+  width: clamp(15%, 25%, 35%);
+  height: clamp(4px, 0.8vw, 8px);
+  border-radius: 2px;
+  background: #5A765A;
+  border: none;
+  margin: clamp(-2rem, -2vw, -1.7rem) auto 0;
+  margin-bottom: 0.2rem;
+}
+
+@media (max-width: 1200px) { .CustomHR4 { width: clamp(40%, 60%, 70%); } }
+@media (max-width: 768px)  { .CustomHR4 { width: clamp(70%, 80%, 90%); } }
+@media (max-width: 400px)  { .CustomHR4 { width: 90%; margin: auto; } }
+
+.AboutMePageContent {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;        
+  justify-content: center;
+  align-items: flex-start;
+  gap: clamp(16px, 2.5vw, 32px);
+  width: 100%;
+  max-width: 1300px;
+  margin-inline: auto;
+  box-sizing: border-box;
+  margin-top: 2rem;
+}
+
+/* Main 3 children (row) */
+.AboutWrapper,
+.Picture-Card-BG2,
+.AboutTextGroup {
+  flex: 1 1 300px;         
+  min-width: 280px;         
+}
+
+/* Picture Card */
+.Picture-Card-BG2 {
+  display: block;
+  margin: 0;
+  background: var(--accent);
+  border-radius: clamp(16px, 2vw, 24px);
+  padding: clamp(8px, 1vw, 12px);
+  box-shadow: 0 6px 18px rgba(0,0,0,.15);
+  transition: transform 0.45s ease, filter 0.45s ease, box-shadow 0.45s ease;
+  transform: scale(0.8); /* small by default */
+  opacity: 0;
+}
+
+/* Hug pop-up animation */
+.Picture-Card-BG2.pop-up {
+  animation: hugPop 0.6s ease-out forwards;
+}
+
+/* Keyframes for hug pop-up */  
+@keyframes hugPop {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  70% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.Picture-Card-BG2:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 24px 48px rgba(94, 196, 81, 0.35), 
+    0 12px 24px rgba(94, 196, 81, 0.25);
+}
+
+.Picture-Card-BG2 img {
+  width: 100%;
+  height: auto;
+  border-radius: clamp(12px, 1vw, 18px);
+  transition: transform 0.45s ease, filter 0.45s ease, box-shadow 0.45s ease;
+}
+
+.Picture-Card-BG2:hover img {
+    transform: scale(1.03); 
+}
+
+.AboutWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(20px, 2vw, 32px);
+}
+
+/* Text Section */
+.Text-Section2 {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(12px, 2vw, 24px);
+  margin: 0;
+  align-content: start;
+  min-width: 0;
+  opacity: 0; 
+}
+
+/* Keyframe swoop + fade in */
+@keyframes swoopFade {
+  0% {
+    opacity: 0;
+    transform: translateX(80px);
+  }
+  40% {
+    opacity: 1;
+    transform: translateX(-15px);
+  }
+  60% {
+    transform: translateX(8px);
+  }
+  80% {
+    transform: translateX(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Animation trigger class */
+.Text-Section2.swoop-fade {
+  animation: swoopFade 1s ease-out forwards;
+}
+
+.aboutText1,
+.aboutText2 {
+  --pad-x: clamp(1rem, 3vw, 2rem);
+  --pad-y: clamp(0.75rem, 2vw, 1.5rem);
+  --bar-left: clamp(10px, 1vw, 16px);
+  --bar-w: 4px;
+  --bar-gap: clamp(6px, 1vw, 10px);
+
+  margin-top: 0;
+  color: #fff;
+  background: var(--accent);
+  font-size: clamp(1rem, 1.2vw, 1.25rem);
+  line-height: 1.6;
+
+  padding:
+    var(--pad-y)
+    var(--pad-x)
+    var(--pad-y)
+    calc(var(--pad-x) + var(--bar-left) + var(--bar-w) + var(--bar-gap));
+
+  border-radius: var(--radius-inner);
+  box-shadow: 0 4px 12px rgba(0,0,0,.18);
+  position: relative;
+  transition: transform .25s ease, box-shadow .25s ease;
+  overflow-wrap: anywhere;
+  opacity: 0;
+  text-align: justify;
+}
+
+.aboutText1::before,
+.aboutText2::before {
+  content: "";
+  position: absolute;
+  inset-block: .55em;
+  left: var(--bar-left);
+  width: var(--bar-w);
+  background: #fff;
+  border-radius: 2px;
+}
+
+.aboutText1.swoop-fade,
+.aboutText2.swoop-fade {
+  animation: swoopFade 1s ease-out forwards;
+}
+  
+.aboutText1:hover,
+.aboutText2:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(59,179,40,.25);
+}
+
+.AboutTextGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(14px, 2vw, 24px);
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.AboutTextBG {
+  flex: 1 1 240px;
+  max-width: 100%;
+}
+
+.AboutTextBG {
+  background: var(--accent);
+  color: #fff;
+  border-radius: clamp(16px, 2vw, 24px);
+  padding: clamp(12px, 1.5vw, 5px);
+  width: 100%;
+  opacity: 0;
+  transform: translateX(-80px);
+}
+
+.AboutTextBG.swoopFadeLTR {
+  animation: swoopFadeLTR 0.8s ease-out forwards;
+}
+
+/* Left-to-right swoop + bounce */
+@keyframes swoopFadeLTR {
+  0% {
+    opacity: 0;
+    transform: translateX(-80px); /* way off left */
+  }
+  40% {
+    opacity: 1;
+    transform: translateX(15px); /* overshoot right */
+  }
+  60% {
+    transform: translateX(-8px); /* bounce back left */
+  }
+  80% {
+    transform: translateX(4px); /* tiny bounce right */
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.AboutTextInner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--card-bg);
+  border-radius: clamp(12px, 1.2vw, 18px);
+  padding: clamp(16px, 2vw, 28px);
+}
+
+.AboutTextBG p {
+  margin: 0;
+  font-size: clamp(1rem, 1.3vw, 1.25rem);
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.aboutText3,
+.aboutText4 {
+  align-self: center;
+  text-align: center;
+  margin-block: 0.5rem;
+}
+
+.CustomHR6 {
+  border: none;
+  border-top: clamp(1px, 0.25vw, 3px) solid #5A765A;
+  width: clamp(60%, 90%, 100%);
+  margin: 1.2rem auto;
+}
+
+/* ===== Icons & Tooltips ===== */
+.IconContainer {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(10px, 1.8vw, 22px);
+  margin-top: clamp(10px, 1.6vw, 16px);
+}
+
+.IconContainer svg {
+  width: clamp(36px, 5vw, 60px);
+  height: auto;
+  fill: currentColor;
+  color: #5A765A;
+  transition: transform .2s ease, color .2s ease;
+}
+
+.IconContainer svg:hover {
+  color: #2d3c2d;
+  transform: scale(1.15);
+}
+
+.svg-message-box {
+  position: absolute;
+  left: 50%;
+  bottom: -3rem;
+  transform: translateX(-50%);
+  padding: .35rem .6rem;
+  background: var(--accent);
+  color: #fff;
+  font-size: clamp(.85rem, 1.1vw, 1rem);
+  border-radius: .5rem;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .2s ease;
+}
+
+/* Icon Container Hover */
+.IconContainer .svg-container:hover ~ .svg-message-box { opacity: 1; }
+
+.IconContainer .html-icon:hover ~ .tech-message-box::after { 
+  content: "HTML — semantic markup"; 
+}
+
+.IconContainer .css-icon:hover ~ .tech-message-box::after { 
+  content: "CSS — styling & layout"; 
+}
+
+.IconContainer .php-icon:hover ~ .tech-message-box::after { 
+  content: "PHP — server-side scripting"; 
+}
+
+.IconContainer .js-icon:hover ~ .tech-message-box::after  { 
+  content: "JavaScript — interactivity"; 
+}
+
+.IconContainer .github-icon:hover ~ .social-message-box::after { 
+  content: "GitHub — open source projects"; 
+}
+
+.IconContainer .messenger-icon:hover ~ .social-message-box::after { 
+  content: "Messenger — chat with me"; 
+}
+
+.IconContainer .discord-icon:hover ~ .social-message-box::after { 
+  content: "Discord — join my server"; 
+}
+
+.IconContainer .linkedin-icon:hover ~ .social-message-box::after { 
+  content: "LinkedIn — connect professionally"; 
+}
+
+/* Responsive tweaks */
+@media (max-width: 1024px) {
+  .AboutMePageContent {
+    flex-direction: column;
+    align-items: center;
+  }
+  .Picture-Card-BG2 {
+    width: min(100%, 420px);
+  }
+  .AboutWrapper,
+  .AboutTextGroup {
+    width: 100%;
+  }
+}
+
+
+
+
+/* === Contact Section === */
+.BG-Card4 {
+  margin: 2vh auto;
+  padding: 2vw;
+  width: 94vw;
+  border-radius: 2vw;
+  background-color: #B1C2A7;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.ContactPageContent {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.ContactSectionWrapper1 {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  flex: 1 1 400px; 
+  min-width: 280px; 
+  opacity: 0;
+  transform: translateX(-80px);
+}
+
+/* Triggered animation */
+.ContactSectionWrapper1.bounceInLeft {
+  animation: bounceInLeft 0.9s ease-out forwards;
+}
+
+/* Bounce left-to-right keyframes */
+@keyframes bounceInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-80px);
+  }
+  40% {
+    opacity: 1;
+    transform: translateX(20px);
+  }
+  60% {
+    transform: translateX(-10px);
+  }
+  80% {
+    transform: translateX(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.ContactSectionWrapper2 {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  flex: 1 1 400px; 
+  min-width: 280px;
+  opacity: 0;
+  transform: translateX(80px);
+}
+
+/* Triggered animation */
+.ContactSectionWrapper2.bounceInRight {
+  animation: bounceInRight 0.9s ease-out forwards;
+}
+
+/* Bounce right-to-left keyframes */
+@keyframes bounceInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(80px);
+  }
+  40% {
+    opacity: 1;
+    transform: translateX(-20px);
+  }
+  60% {
+    transform: translateX(10px);
+  }
+  80% {
+    transform: translateX(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.HeadText3Group {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;  
+  width: 100%;
+  padding: 0 0;
+  box-sizing: border-box;
+}
+
+/* Left heading */
+.ContactHeadText1 {
+  text-align: left;
+  line-height: 1.2;
+  font-size: clamp(3rem, 5vw, 6rem);
+  max-width: 100%;
+  margin: 0;
+}
+
+/* Right heading */
+.ContactHeadText2 {
+  text-align: right;
+  line-height: 1.2;
+  font-size: clamp(3rem, 5vw, 7rem);
+  max-width: 100%;
+  white-space: nowrap;
+  margin: 0;
+}
+
+/* Responsive tweak */
+@media (max-width: 768px) {
+  .ContactSectionWrapper {
+    flex: 1 1 100%;
+    align-items: center;
+    text-align: center;
+  }
+  .ContactHeadText1,
+  .ContactHeadText2 {
+    text-align: center;
+    white-space: normal;
+  }
+  .ContactTextInner {
+    flex-direction: column;
+    gap: 2rem;
+  }
+}
+
+.Text-Section3 {
+  display: flex;
+  justify-content: center;
+  margin-top: 0;
+  padding: 0 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.ContactTextGroup {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 1450px;
+  margin: 0 auto;
+}
+
+.ContactTextInner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: clamp(2rem, 4vw, 6rem);
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.ContactTextBG1 {
+  flex: 1 1 120px;  
+  background-color: #5A765A;
+  border-radius: 2rem;
+  padding: 2rem;
+  color: #fff;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.25);
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  box-sizing: border-box;
+  margin-bottom: 0;
+}
+
+.ContactTextBG1:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 32px rgba(63, 253, 38, 0.35);
+}
+
+.ContactTextBG2 {
+  flex: 1 1 320px;
+  background-color: #5A765A;
+  border-radius: 2rem;
+  padding: 2rem;
+  color: #fff;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.25);
+  display: flex;
+  flex-direction: column;
+}
+
+.ContactTextBG2:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 32px rgba(63, 253, 38, 0.35);
+}
+
+.ContactTextTitle {
+  margin: 0 0 1.5rem 0;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 700;
+}
+
+/* Info lines */
+.ContactInfoContainer p {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 0.8rem 0;
+  margin-bottom: 0;
+  font-size: clamp(1rem, 1.5vw, 2.2rem);
+  padding: 0.8rem 1.2rem;
+  background-color: #B1C2A7;
+  border-radius: 1.2rem;
+  transition: transform .28s cubic-bezier(.22,.9,.32,1), background-color .28s ease;
+}
+
+/* Icons */
+.ContactInfoContainer svg {
+  width: clamp(20px, 3vw, 28px);
+  height: clamp(20px, 3vw, 28px);
+  flex-shrink: 0;
+  transition: transform .28s cubic-bezier(.22,.9,.32,1);
+  transform-origin: center;
+  border-right: 2px solid rgba(0,0,0,0.25);
+  padding-right: 0.6rem;
+  margin-right: 0.6rem;
+  box-sizing: content-box;
+}
+
+.ContactInfoContainer p:hover {
+  color: #5A765A;
+  transform: scale(1.05);
+  box-shadow: 0 0 32px rgba(63, 253, 38, 0.35);
+}
+.ContactInfoContainer svg:hover { transform: scale(1.05); }
+.ContactInfoContainer p:hover svg { border-color: #fff; }
+
+/* Form box adjustments */
+.form-container {
+  flex: 1 1 320px;
+  display: flex;
+}
+
+.form-box form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.form-box input,
+.form-box textarea {
+  background-color: #B1C2A7;
+  color: #fff;
+  padding: 1rem 1.2rem;
+  border: none;
+  border-radius: 1rem;
+  font-size: clamp(0.9rem, 1.2vw, 2rem);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-box input:hover, .form-box textarea:hover {
+  box-shadow: 0 0 32px rgba(63, 253, 38, 0.35);
+}
+
+.form-box textarea {
+  min-height: 20vh;
+  resize: vertical;
+}
+
+.form-box input::placeholder,
+.form-box textarea::placeholder {
+  color: #fff;
+  opacity: 1;
+}
+
+.Btn-Section3 {
+  margin: 0.8rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(10px, 1.6vw, 18px);
+  width: 100%;
+  align-items: center;
+  align-self: center;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .HeadText3Group {
+    flex-direction: column;
+    text-align: center;
+  }
+  .ContactHeadText1,
+  .ContactHeadText2 {
+    text-align: center;
+    white-space: normal;
+  }
+  .ContactTextInner {
+    flex-direction: column;
+    gap: 2rem;
+  }
+}
